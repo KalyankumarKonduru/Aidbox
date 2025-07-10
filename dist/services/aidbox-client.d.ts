@@ -10,8 +10,11 @@ export declare class AidboxClient {
     private client;
     private config;
     private connected;
+    private accessToken?;
+    private tokenExpiry?;
     constructor(config: AidboxConfig);
-    private setupAuth;
+    private setupInterceptors;
+    private getAccessToken;
     testConnection(): Promise<void>;
     isConnected(): boolean;
     search(resourceType: string, params?: any): Promise<any>;

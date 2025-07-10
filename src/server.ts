@@ -132,9 +132,19 @@ export class AidboxMCPServer {
       logger.log('🏥 Aidbox MCP Server v1.0.0');
       logger.log('================================');
       
-      // Test Aidbox connection
-      await this.aidboxClient.testConnection();
-      logger.log('✅ Connected to Aidbox successfully');
+      // Test Aidbox connection (skip if in standalone mode)
+      if (process.env.SKIP_AIDBOX_CONNECTION !== 'true') {
+        try {
+          await this.aidboxClient.testConnection();
+          logger.log('✅ Connected to Aidbox successfully');
+        } catch (error) {
+          logger.error('⚠️  Warning: Could not connect to Aidbox:', error);
+          logger.log('🔧 Starting in degraded mode - FHIR operations will fail');
+          logger.log('💡 To fix: Ensure Aidbox is running at', process.env.AIDBOX_URL);
+        }
+      } else {
+        logger.log('⚠️  Running in standalone mode (no Aidbox connection)');
+      }
 
       if (isHttpMode) {
         await this.startHttpServer();
@@ -208,26 +218,57 @@ export class AidboxMCPServer {
             id: request.id
           });
         } else if (request.method === 'tools/call') {
-            try {
-              const result = await this.server.dispatchRequest(request); // <-- this is the actual method in MCP SDK
-              res.json({
-                jsonrpc: '2.0',
-                result,
-                id: request.id
-              });
-            } catch (error) {
-              logger.error('Tool dispatch error:', error);
-              res.status(500).json({
-                jsonrpc: '2.0',
-                error: {
-                  code: -32603,
-                  message: error instanceof Error ? error.message : 'Unknown internal error'
-                },
-                id: request.id
-              });
+          // Handle tool call directly
+          const { name, arguments: args } = request.params;
+          
+          try {
+            const toolHandlers: Record<string, () => Promise<any>> = {
+              // FHIR Patient tools
+              'searchPatients': () => this.fhirTools.handleSearchPatients(args),
+              'getPatientDetails': () => this.fhirTools.handleGetPatient(args),
+              'createPatient': () => this.fhirTools.handleCreatePatient(args),
+              'updatePatient': () => this.fhirTools.handleUpdatePatient(args),
+              
+              // FHIR Observation tools
+              'getPatientObservations': () => this.fhirTools.handleGetObservations(args),
+              'createObservation': () => this.fhirTools.handleCreateObservation(args),
+              
+              // FHIR Medication tools
+              'getPatientMedications': () => this.fhirTools.handleGetMedications(args),
+              'createMedicationRequest': () => this.fhirTools.handleCreateMedicationRequest(args),
+              
+              // FHIR Condition tools
+              'getPatientConditions': () => this.fhirTools.handleGetConditions(args),
+              'createCondition': () => this.fhirTools.handleCreateCondition(args),
+              
+              // FHIR Encounter tools
+              'getPatientEncounters': () => this.fhirTools.handleGetEncounters(args),
+              'createEncounter': () => this.fhirTools.handleCreateEncounter(args),
+            };
+
+            const handler = toolHandlers[name];
+            if (!handler) {
+              throw new Error(`Unknown tool: ${name}`);
             }
+
+            const result = await handler();
+            res.json({
+              jsonrpc: '2.0',
+              result,
+              id: request.id
+            });
+          } catch (error) {
+            logger.error(`Tool execution error:`, error);
+            res.json({
+              jsonrpc: '2.0',
+              error: {
+                code: -32603,
+                message: error instanceof Error ? error.message : 'Tool execution failed'
+              },
+              id: request.id
+            });
           }
-           else {
+        } else {
           res.status(400).json({
             jsonrpc: '2.0',
             error: {
