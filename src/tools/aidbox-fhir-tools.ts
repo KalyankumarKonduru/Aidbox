@@ -7,7 +7,7 @@ export class AidboxFHIRTools {
   // Tool 1: Search Patients
   createSearchPatientsTool(): Tool {
     return {
-      name: 'searchPatients',
+      name: 'aidboxSearchPatients',
       description: 'Search for patients in Aidbox by name, birthdate, identifier, or other criteria',
       inputSchema: {
         type: 'object',
@@ -53,7 +53,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleSearchPatients(args: any): Promise<any> {
+  async handleAidboxSearchPatients(args: any): Promise<any> {
     try {
       const params: any = {};
       
@@ -103,7 +103,7 @@ export class AidboxFHIRTools {
   // Tool 2: Get Patient Details
   createGetPatientTool(): Tool {
     return {
-      name: 'getPatientDetails',
+      name: 'aidboxGetPatientDetails',
       description: 'Get detailed information for a specific patient by ID',
       inputSchema: {
         type: 'object',
@@ -119,7 +119,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleGetPatient(args: { patientId: string }): Promise<any> {
+  async handleAidboxGetPatient(args: { patientId: string }): Promise<any> {
     try {
       const patient = await this.client.get('Patient', args.patientId);
       
@@ -153,7 +153,7 @@ export class AidboxFHIRTools {
   // Tool 3: Create Patient
   createCreatePatientTool(): Tool {
     return {
-      name: 'createPatient',
+      name: 'aidboxCreatePatient',
       description: 'Create a new patient in Aidbox',
       inputSchema: {
         type: 'object',
@@ -202,7 +202,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleCreatePatient(args: any): Promise<any> {
+  async handleAidboxCreatePatient(args: any): Promise<any> {
     try {
       const patient: any = {
         resourceType: 'Patient',
@@ -276,7 +276,7 @@ export class AidboxFHIRTools {
   // Tool 4: Update Patient
   createUpdatePatientTool(): Tool {
     return {
-      name: 'updatePatient',
+      name: 'aidboxUpdatePatient',
       description: 'Update existing patient information',
       inputSchema: {
         type: 'object',
@@ -298,7 +298,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleUpdatePatient(args: any): Promise<any> {
+  async handleAidboxUpdatePatient(args: any): Promise<any> {
     try {
       // Get existing patient
       const existing = await this.client.get('Patient', args.patientId);
@@ -363,7 +363,7 @@ export class AidboxFHIRTools {
   // Tool 5: Get Patient Observations
   createGetObservationsTool(): Tool {
     return {
-      name: 'getPatientObservations',
+      name: 'aidboxGetPatientObservations',
       description: 'Get lab results, vital signs, and other observations for a patient',
       inputSchema: {
         type: 'object',
@@ -396,7 +396,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleGetObservations(args: any): Promise<any> {
+  async handleAidboxGetObservations(args: any): Promise<any> {
     try {
       const params: any = {
         patient: args.patientId,
@@ -446,7 +446,7 @@ export class AidboxFHIRTools {
   // Tool 6: Create Observation
   createCreateObservationTool(): Tool {
     return {
-      name: 'createObservation',
+      name: 'aidboxCreateObservation',
       description: 'Create a new observation (lab result, vital sign, etc.)',
       inputSchema: {
         type: 'object',
@@ -486,7 +486,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleCreateObservation(args: any): Promise<any> {
+  async handleAidboxCreateObservation(args: any): Promise<any> {
     try {
       const observation: any = {
         resourceType: 'Observation',
@@ -552,7 +552,7 @@ export class AidboxFHIRTools {
   // Tool 7: Get Patient Medications
   createGetMedicationsTool(): Tool {
     return {
-      name: 'getPatientMedications',
+      name: 'aidboxGetPatientMedications',
       description: 'Get current and past medications for a patient',
       inputSchema: {
         type: 'object',
@@ -577,7 +577,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleGetMedications(args: any): Promise<any> {
+  async handleAidboxGetMedications(args: any): Promise<any> {
     try {
       const params: any = {
         patient: args.patientId,
@@ -626,7 +626,7 @@ export class AidboxFHIRTools {
   // Tool 8: Create Medication Request
   createCreateMedicationRequestTool(): Tool {
     return {
-      name: 'createMedicationRequest',
+      name: 'aidboxCreateMedicationRequest',
       description: 'Create a new medication request/prescription',
       inputSchema: {
         type: 'object',
@@ -662,7 +662,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleCreateMedicationRequest(args: any): Promise<any> {
+  async handleAidboxCreateMedicationRequest(args: any): Promise<any> {
     try {
       const medicationRequest: any = {
         resourceType: 'MedicationRequest',
@@ -718,7 +718,7 @@ export class AidboxFHIRTools {
   // Tool 9: Get Patient Conditions
   createGetConditionsTool(): Tool {
     return {
-      name: 'getPatientConditions',
+      name: 'aidboxGetPatientConditions',
       description: 'Get diagnoses and medical conditions for a patient',
       inputSchema: {
         type: 'object',
@@ -743,7 +743,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleGetConditions(args: any): Promise<any> {
+  async handleAidboxGetConditions(args: any): Promise<any> {
     try {
       const params: any = {
         patient: args.patientId,
@@ -790,7 +790,7 @@ export class AidboxFHIRTools {
   // Tool 10: Create Condition
   createCreateConditionTool(): Tool {
     return {
-      name: 'createCondition',
+      name: 'aidboxCreateCondition',
       description: 'Create a new condition/diagnosis',
       inputSchema: {
         type: 'object',
@@ -822,7 +822,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleCreateCondition(args: any): Promise<any> {
+  async handleAidboxCreateCondition(args: any): Promise<any> {
     try {
       const condition: any = {
         resourceType: 'Condition',
@@ -879,7 +879,7 @@ export class AidboxFHIRTools {
   // Tool 11: Get Patient Encounters
   createGetEncountersTool(): Tool {
     return {
-      name: 'getPatientEncounters',
+      name: 'aidboxGetPatientEncounters',
       description: 'Get healthcare encounters/visits for a patient',
       inputSchema: {
         type: 'object',
@@ -908,7 +908,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleGetEncounters(args: any): Promise<any> {
+  async handleAidboxGetEncounters(args: any): Promise<any> {
     try {
       const params: any = {
         patient: args.patientId,
@@ -959,7 +959,7 @@ export class AidboxFHIRTools {
   // Tool 12: Create Encounter
   createCreateEncounterTool(): Tool {
     return {
-      name: 'createEncounter',
+      name: 'aidboxCreateEncounter',
       description: 'Create a new encounter/visit',
       inputSchema: {
         type: 'object',
@@ -1000,7 +1000,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  async handleCreateEncounter(args: any): Promise<any> {
+  async handleAidboxCreateEncounter(args: any): Promise<any> {
     try {
       const encounter: any = {
         resourceType: 'Encounter',

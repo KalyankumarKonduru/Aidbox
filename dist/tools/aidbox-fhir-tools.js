@@ -9,7 +9,7 @@ class AidboxFHIRTools {
     // Tool 1: Search Patients
     createSearchPatientsTool() {
         return {
-            name: 'searchPatients',
+            name: 'aidboxSearchPatients',
             description: 'Search for patients in Aidbox by name, birthdate, identifier, or other criteria',
             inputSchema: {
                 type: 'object',
@@ -54,7 +54,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleSearchPatients(args) {
+    async handleAidboxSearchPatients(args) {
         try {
             const params = {};
             // Map arguments to FHIR search parameters
@@ -108,7 +108,7 @@ class AidboxFHIRTools {
     // Tool 2: Get Patient Details
     createGetPatientTool() {
         return {
-            name: 'getPatientDetails',
+            name: 'aidboxGetPatientDetails',
             description: 'Get detailed information for a specific patient by ID',
             inputSchema: {
                 type: 'object',
@@ -123,7 +123,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleGetPatient(args) {
+    async handleAidboxGetPatient(args) {
         try {
             const patient = await this.client.get('Patient', args.patientId);
             return {
@@ -156,7 +156,7 @@ class AidboxFHIRTools {
     // Tool 3: Create Patient
     createCreatePatientTool() {
         return {
-            name: 'createPatient',
+            name: 'aidboxCreatePatient',
             description: 'Create a new patient in Aidbox',
             inputSchema: {
                 type: 'object',
@@ -204,7 +204,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleCreatePatient(args) {
+    async handleAidboxCreatePatient(args) {
         try {
             const patient = {
                 resourceType: 'Patient',
@@ -274,7 +274,7 @@ class AidboxFHIRTools {
     // Tool 4: Update Patient
     createUpdatePatientTool() {
         return {
-            name: 'updatePatient',
+            name: 'aidboxUpdatePatient',
             description: 'Update existing patient information',
             inputSchema: {
                 type: 'object',
@@ -295,7 +295,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleUpdatePatient(args) {
+    async handleAidboxUpdatePatient(args) {
         try {
             // Get existing patient
             const existing = await this.client.get('Patient', args.patientId);
@@ -360,7 +360,7 @@ class AidboxFHIRTools {
     // Tool 5: Get Patient Observations
     createGetObservationsTool() {
         return {
-            name: 'getPatientObservations',
+            name: 'aidboxGetPatientObservations',
             description: 'Get lab results, vital signs, and other observations for a patient',
             inputSchema: {
                 type: 'object',
@@ -392,7 +392,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleGetObservations(args) {
+    async handleAidboxGetObservations(args) {
         try {
             const params = {
                 patient: args.patientId,
@@ -441,7 +441,7 @@ class AidboxFHIRTools {
     // Tool 6: Create Observation
     createCreateObservationTool() {
         return {
-            name: 'createObservation',
+            name: 'aidboxCreateObservation',
             description: 'Create a new observation (lab result, vital sign, etc.)',
             inputSchema: {
                 type: 'object',
@@ -480,7 +480,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleCreateObservation(args) {
+    async handleAidboxCreateObservation(args) {
         try {
             const observation = {
                 resourceType: 'Observation',
@@ -541,7 +541,7 @@ class AidboxFHIRTools {
     // Tool 7: Get Patient Medications
     createGetMedicationsTool() {
         return {
-            name: 'getPatientMedications',
+            name: 'aidboxGetPatientMedications',
             description: 'Get current and past medications for a patient',
             inputSchema: {
                 type: 'object',
@@ -565,7 +565,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleGetMedications(args) {
+    async handleAidboxGetMedications(args) {
         try {
             const params = {
                 patient: args.patientId,
@@ -611,7 +611,7 @@ class AidboxFHIRTools {
     // Tool 8: Create Medication Request
     createCreateMedicationRequestTool() {
         return {
-            name: 'createMedicationRequest',
+            name: 'aidboxCreateMedicationRequest',
             description: 'Create a new medication request/prescription',
             inputSchema: {
                 type: 'object',
@@ -646,7 +646,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleCreateMedicationRequest(args) {
+    async handleAidboxCreateMedicationRequest(args) {
         try {
             const medicationRequest = {
                 resourceType: 'MedicationRequest',
@@ -698,7 +698,7 @@ class AidboxFHIRTools {
     // Tool 9: Get Patient Conditions
     createGetConditionsTool() {
         return {
-            name: 'getPatientConditions',
+            name: 'aidboxGetPatientConditions',
             description: 'Get diagnoses and medical conditions for a patient',
             inputSchema: {
                 type: 'object',
@@ -722,7 +722,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleGetConditions(args) {
+    async handleAidboxGetConditions(args) {
         try {
             const params = {
                 patient: args.patientId,
@@ -766,7 +766,7 @@ class AidboxFHIRTools {
     // Tool 10: Create Condition
     createCreateConditionTool() {
         return {
-            name: 'createCondition',
+            name: 'aidboxCreateCondition',
             description: 'Create a new condition/diagnosis',
             inputSchema: {
                 type: 'object',
@@ -797,7 +797,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleCreateCondition(args) {
+    async handleAidboxCreateCondition(args) {
         try {
             const condition = {
                 resourceType: 'Condition',
@@ -850,7 +850,7 @@ class AidboxFHIRTools {
     // Tool 11: Get Patient Encounters
     createGetEncountersTool() {
         return {
-            name: 'getPatientEncounters',
+            name: 'aidboxGetPatientEncounters',
             description: 'Get healthcare encounters/visits for a patient',
             inputSchema: {
                 type: 'object',
@@ -878,7 +878,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleGetEncounters(args) {
+    async handleAidboxGetEncounters(args) {
         try {
             const params = {
                 patient: args.patientId,
@@ -927,7 +927,7 @@ class AidboxFHIRTools {
     // Tool 12: Create Encounter
     createCreateEncounterTool() {
         return {
-            name: 'createEncounter',
+            name: 'aidboxCreateEncounter',
             description: 'Create a new encounter/visit',
             inputSchema: {
                 type: 'object',
@@ -967,7 +967,7 @@ class AidboxFHIRTools {
             }
         };
     }
-    async handleCreateEncounter(args) {
+    async handleAidboxCreateEncounter(args) {
         try {
             const encounter = {
                 resourceType: 'Encounter',

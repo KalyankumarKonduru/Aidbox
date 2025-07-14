@@ -79,26 +79,26 @@ export class AidboxMCPServer {
         // Route to appropriate tool handler
         const toolHandlers: Record<string, () => Promise<any>> = {
           // FHIR Patient tools
-          'searchPatients': () => this.fhirTools.handleSearchPatients(args as any),
-          'getPatientDetails': () => this.fhirTools.handleGetPatient(args as any),
-          'createPatient': () => this.fhirTools.handleCreatePatient(args as any),
-          'updatePatient': () => this.fhirTools.handleUpdatePatient(args as any),
+          'aidboxSearchPatients': () => this.fhirTools.handleAidboxSearchPatients(args as any),
+          'aidboxGetPatientDetails': () => this.fhirTools.handleAidboxGetPatient(args as any),
+          'aidboxCreatePatient': () => this.fhirTools.handleAidboxCreatePatient(args as any),
+          'aidboxUpdatePatient': () => this.fhirTools.handleAidboxUpdatePatient(args as any),
           
           // FHIR Observation tools
-          'getPatientObservations': () => this.fhirTools.handleGetObservations(args as any),
-          'createObservation': () => this.fhirTools.handleCreateObservation(args as any),
+          'aidboxGetPatientObservations': () => this.fhirTools.handleAidboxGetObservations(args as any),
+          'aidboxCreateObservation': () => this.fhirTools.handleAidboxCreateObservation(args as any),
           
           // FHIR Medication tools
-          'getPatientMedications': () => this.fhirTools.handleGetMedications(args as any),
-          'createMedicationRequest': () => this.fhirTools.handleCreateMedicationRequest(args as any),
+          'aidboxGetPatientMedications': () => this.fhirTools.handleAidboxGetMedications(args as any),
+          'aidboxCreateMedicationRequest': () => this.fhirTools.handleAidboxCreateMedicationRequest(args as any),
           
           // FHIR Condition tools
-          'getPatientConditions': () => this.fhirTools.handleGetConditions(args as any),
-          'createCondition': () => this.fhirTools.handleCreateCondition(args as any),
+          'aidboxGetPatientConditions': () => this.fhirTools.handleAidboxGetConditions(args as any),
+          'aidboxCreateCondition': () => this.fhirTools.handleAidboxCreateCondition(args as any),
           
           // FHIR Encounter tools
-          'getPatientEncounters': () => this.fhirTools.handleGetEncounters(args as any),
-          'createEncounter': () => this.fhirTools.handleCreateEncounter(args as any),
+          'aidboxGetPatientEncounters': () => this.fhirTools.handleAidboxGetEncounters(args as any),
+          'aidboxCreateEncounter': () => this.fhirTools.handleAidboxCreateEncounter(args as any),
         };
 
         const handler = toolHandlers[name];
@@ -224,26 +224,26 @@ export class AidboxMCPServer {
           try {
             const toolHandlers: Record<string, () => Promise<any>> = {
               // FHIR Patient tools
-              'searchPatients': () => this.fhirTools.handleSearchPatients(args),
-              'getPatientDetails': () => this.fhirTools.handleGetPatient(args),
-              'createPatient': () => this.fhirTools.handleCreatePatient(args),
-              'updatePatient': () => this.fhirTools.handleUpdatePatient(args),
+              'aidboxSearchPatients': () => this.fhirTools.handleAidboxSearchPatients(args),
+              'aidboxGetPatientDetails': () => this.fhirTools.handleAidboxGetPatient(args),
+              'aidboxCreatePatient': () => this.fhirTools.handleAidboxCreatePatient(args),
+              'aidboxUpdatePatient': () => this.fhirTools.handleAidboxUpdatePatient(args),
               
               // FHIR Observation tools
-              'getPatientObservations': () => this.fhirTools.handleGetObservations(args),
-              'createObservation': () => this.fhirTools.handleCreateObservation(args),
+              'aidboxGetPatientObservations': () => this.fhirTools.handleAidboxGetObservations(args),
+              'aidboxCreateObservation': () => this.fhirTools.handleAidboxCreateObservation(args),
               
               // FHIR Medication tools
-              'getPatientMedications': () => this.fhirTools.handleGetMedications(args),
-              'createMedicationRequest': () => this.fhirTools.handleCreateMedicationRequest(args),
+              'aidboxGetPatientMedications': () => this.fhirTools.handleAidboxGetMedications(args),
+              'aidboxCreateMedicationRequest': () => this.fhirTools.handleAidboxCreateMedicationRequest(args),
               
               // FHIR Condition tools
-              'getPatientConditions': () => this.fhirTools.handleGetConditions(args),
-              'createCondition': () => this.fhirTools.handleCreateCondition(args),
+              'aidboxGetPatientConditions': () => this.fhirTools.handleAidboxGetConditions(args),
+              'aidboxCreateCondition': () => this.fhirTools.handleAidboxCreateCondition(args),    
               
               // FHIR Encounter tools
-              'getPatientEncounters': () => this.fhirTools.handleGetEncounters(args),
-              'createEncounter': () => this.fhirTools.handleCreateEncounter(args),
+              'aidboxGetPatientEncounters': () => this.fhirTools.handleAidboxGetEncounters(args),
+              'aidboxCreateEncounter': () => this.fhirTools.handleAidboxCreateEncounter(args),
             };
 
             const handler = toolHandlers[name];
