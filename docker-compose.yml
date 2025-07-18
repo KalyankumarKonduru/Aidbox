@@ -9,7 +9,7 @@ services:
       - NODE_ENV=production
       - PORT=3002
       - MCP_HTTP_MODE=true
-      - AIDBOX_BASE_URL=${AIDBOX_BASE_URL}
+      - AIDBOX_URL=${AIDBOX_URL}
       - AIDBOX_CLIENT_ID=${AIDBOX_CLIENT_ID}
       - AIDBOX_CLIENT_SECRET=${AIDBOX_CLIENT_SECRET}
     volumes:

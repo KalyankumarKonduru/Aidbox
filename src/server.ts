@@ -180,8 +180,8 @@ export class AidboxMCPServer {
       });
     });
 
-    // MCP endpoint
-    app.post('/mcp', async (req, res) => {
+    // Shared MCP request handler
+    const handleMCPRequest = async (req: any, res: any) => {
       try {
         const request = req.body;
         
@@ -289,6 +289,24 @@ export class AidboxMCPServer {
           id: req.body?.id || null
         });
       }
+    };
+
+    // MCP endpoints - both /mcp and root /
+    app.post('/mcp', handleMCPRequest);
+    app.post('/', handleMCPRequest);
+
+    // Add GET handler for root to provide info
+    app.get('/', (req, res) => {
+      res.json({
+        name: 'aidbox-mcp-server',
+        version: '1.0.0',
+        description: 'Aidbox MCP Server with FHIR tools',
+        endpoints: {
+          health: '/health',
+          mcp: '/mcp or /',
+        },
+        tools: this.fhirTools.getAllTools().length
+      });
     });
 
     const port = process.env.MCP_HTTP_PORT || 3002;
@@ -299,6 +317,7 @@ export class AidboxMCPServer {
       logger.log(`✓ HTTP Server listening on port ${port}`);
       logger.log(`🌐 Health check: http://localhost:${port}/health`);
       logger.log(`🔗 MCP endpoint: http://localhost:${port}/mcp`);
+      logger.log(`🔗 MCP root endpoint: http://localhost:${port}/`);
       logger.log(`🏥 Aidbox URL: ${process.env.AIDBOX_URL}`);
       
       this.logAvailableTools();
