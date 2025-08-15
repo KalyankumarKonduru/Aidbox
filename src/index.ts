@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { AidboxMCPServer } from './server.js';
 import dotenv from 'dotenv';
 
@@ -15,8 +13,7 @@ const isHttpMode = process.env.MCP_HTTP_MODE === 'true';
 async function main() {
   try {
     const server = new AidboxMCPServer();
-    
-    // Setup graceful shutdown
+
     let isShuttingDown = false;
     
     const gracefulShutdown = async (signal: string) => {

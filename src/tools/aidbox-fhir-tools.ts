@@ -3,8 +3,6 @@ import { AidboxClient } from '../services/aidbox-client.js';
 
 export class AidboxFHIRTools {
   constructor(private client: AidboxClient) {}
-
-  // Tool 1: Search Patients
   createSearchPatientsTool(): Tool {
     return {
       name: 'aidboxSearchPatients',
@@ -57,7 +55,6 @@ export class AidboxFHIRTools {
     try {
       const params: any = {};
       
-      // Map arguments to FHIR search parameters
       if (args.name) params.name = args.name;
       if (args.given) params.given = args.given;
       if (args.family) params.family = args.family;
@@ -100,7 +97,6 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 2: Get Patient Details
   createGetPatientTool(): Tool {
     return {
       name: 'aidboxGetPatientDetails',
@@ -150,7 +146,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 3: Create Patient
+
   createCreatePatientTool(): Tool {
     return {
       name: 'aidboxCreatePatient',
@@ -273,7 +269,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 4: Update Patient
+
   createUpdatePatientTool(): Tool {
     return {
       name: 'aidboxUpdatePatient',
@@ -360,7 +356,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 5: Get Patient Observations
+
   createGetObservationsTool(): Tool {
     return {
       name: 'aidboxGetPatientObservations',
@@ -443,7 +439,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 6: Create Observation
+
   createCreateObservationTool(): Tool {
     return {
       name: 'aidboxCreateObservation',
@@ -549,7 +545,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 7: Get Patient Medications
+
   createGetMedicationsTool(): Tool {
     return {
       name: 'aidboxGetPatientMedications',
@@ -623,7 +619,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 8: Create Medication Request
+
   createCreateMedicationRequestTool(): Tool {
     return {
       name: 'aidboxCreateMedicationRequest',
@@ -715,7 +711,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 9: Get Patient Conditions
+
   createGetConditionsTool(): Tool {
     return {
       name: 'aidboxGetPatientConditions',
@@ -787,7 +783,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 10: Create Condition
+
   createCreateConditionTool(): Tool {
     return {
       name: 'aidboxCreateCondition',
@@ -876,7 +872,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 11: Get Patient Encounters
+
   createGetEncountersTool(): Tool {
     return {
       name: 'aidboxGetPatientEncounters',
@@ -956,7 +952,7 @@ export class AidboxFHIRTools {
     }
   }
 
-  // Tool 12: Create Encounter
+
   createCreateEncounterTool(): Tool {
     return {
       name: 'aidboxCreateEncounter',
@@ -1135,7 +1131,7 @@ export class AidboxFHIRTools {
     };
   }
 
-  // Get all tools
+
   getAllTools(): Tool[] {
     return [
       this.createSearchPatientsTool(),

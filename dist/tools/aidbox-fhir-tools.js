@@ -6,7 +6,6 @@ class AidboxFHIRTools {
     constructor(client) {
         this.client = client;
     }
-    // Tool 1: Search Patients
     createSearchPatientsTool() {
         return {
             name: 'aidboxSearchPatients',
@@ -57,7 +56,6 @@ class AidboxFHIRTools {
     async handleAidboxSearchPatients(args) {
         try {
             const params = {};
-            // Map arguments to FHIR search parameters
             if (args.name)
                 params.name = args.name;
             if (args.given)
@@ -105,7 +103,6 @@ class AidboxFHIRTools {
             return this.handleError('searchPatients', error);
         }
     }
-    // Tool 2: Get Patient Details
     createGetPatientTool() {
         return {
             name: 'aidboxGetPatientDetails',
@@ -153,7 +150,6 @@ class AidboxFHIRTools {
             return this.handleError('getPatientDetails', error);
         }
     }
-    // Tool 3: Create Patient
     createCreatePatientTool() {
         return {
             name: 'aidboxCreatePatient',
@@ -271,7 +267,6 @@ class AidboxFHIRTools {
             return this.handleError('createPatient', error);
         }
     }
-    // Tool 4: Update Patient
     createUpdatePatientTool() {
         return {
             name: 'aidboxUpdatePatient',
@@ -357,7 +352,6 @@ class AidboxFHIRTools {
             return this.handleError('updatePatient', error);
         }
     }
-    // Tool 5: Get Patient Observations
     createGetObservationsTool() {
         return {
             name: 'aidboxGetPatientObservations',
@@ -438,7 +432,6 @@ class AidboxFHIRTools {
             return this.handleError('getPatientObservations', error);
         }
     }
-    // Tool 6: Create Observation
     createCreateObservationTool() {
         return {
             name: 'aidboxCreateObservation',
@@ -538,7 +531,6 @@ class AidboxFHIRTools {
             return this.handleError('createObservation', error);
         }
     }
-    // Tool 7: Get Patient Medications
     createGetMedicationsTool() {
         return {
             name: 'aidboxGetPatientMedications',
@@ -608,7 +600,6 @@ class AidboxFHIRTools {
             return this.handleError('getPatientMedications', error);
         }
     }
-    // Tool 8: Create Medication Request
     createCreateMedicationRequestTool() {
         return {
             name: 'aidboxCreateMedicationRequest',
@@ -695,7 +686,6 @@ class AidboxFHIRTools {
             return this.handleError('createMedicationRequest', error);
         }
     }
-    // Tool 9: Get Patient Conditions
     createGetConditionsTool() {
         return {
             name: 'aidboxGetPatientConditions',
@@ -763,7 +753,6 @@ class AidboxFHIRTools {
             return this.handleError('getPatientConditions', error);
         }
     }
-    // Tool 10: Create Condition
     createCreateConditionTool() {
         return {
             name: 'aidboxCreateCondition',
@@ -847,7 +836,6 @@ class AidboxFHIRTools {
             return this.handleError('createCondition', error);
         }
     }
-    // Tool 11: Get Patient Encounters
     createGetEncountersTool() {
         return {
             name: 'aidboxGetPatientEncounters',
@@ -924,7 +912,6 @@ class AidboxFHIRTools {
             return this.handleError('getPatientEncounters', error);
         }
     }
-    // Tool 12: Create Encounter
     createCreateEncounterTool() {
         return {
             name: 'aidboxCreateEncounter',
@@ -1100,7 +1087,6 @@ class AidboxFHIRTools {
             isError: true
         };
     }
-    // Get all tools
     getAllTools() {
         return [
             this.createSearchPatientsTool(),

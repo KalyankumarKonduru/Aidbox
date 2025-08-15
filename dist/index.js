@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -17,7 +16,6 @@ const isHttpMode = process.env.MCP_HTTP_MODE === 'true';
 async function main() {
     try {
         const server = new server_js_1.AidboxMCPServer();
-        // Setup graceful shutdown
         let isShuttingDown = false;
         const gracefulShutdown = async (signal) => {
             if (isShuttingDown)
